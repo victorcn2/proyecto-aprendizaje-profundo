@@ -1,0 +1,12 @@
+# Librerías básicas de procesamiento y visualización
+numpy
+pandas
+matplotlib
+seaborn
+Pillow
+
+# Deep Learning
+tensorflow
+
+# Utilidades
+scikit-learn
