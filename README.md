@@ -13,7 +13,7 @@ Utilizaremos el dataset Garbage Classification, el cual contiene aproximadamente
 - Plástico (Plastic)
 - Basura mixta (Trash)
 
-Los datos presentan variaciones en iluminación y escala, lo que supone un reto realista para el entrenamiento de modelos de visión artificial.
+Los datos presentan variaciones en iluminación y escala, lo que supone un reto realista para el entrenamiento de modelos de visión artificial. Los datos pueden descargarse desde este enlace a Kaggle: https://www.kaggle.com/datasets/asdasdasasdas/garbage-classification. Deben descomprimirse en la carpeta /data siguiendo la estructura de subcarpetas por clase.
 
 # 3. Métricas de Evaluación
 Para medir el éxito de nuestros modelos, utilizaremos:
