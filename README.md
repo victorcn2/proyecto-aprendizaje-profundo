@@ -33,3 +33,26 @@ Siguiendo la planificación de la asignatura, el proyecto se divide en las sigui
 ├── notebooks/          # Notebooks de Jupyter
 ├── README.md           # Descripción del proyecto
 └── requirements.txt    # Librerías necesarias 
+
+# 6. Tabla primeros modelos
+Vamos a poner en una primera tabla los resultados de unos primeros modelos muy simples:
+
+| Modelo | Parámetros | Train Acc | Val Acc | Test Acc | Notas |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Regresión Logística (Lineal)** | ~295,000 | 0.7611 | 0.4407 | **0.4545** | No converge y sobreentrena |
+| **Random Forest (ML)** | 5,902 | 0.7729 | 0.6126 | **0.6186** | Limitamos profundidad para evitar sobreentrenamiento |
+| **Red Neuronal Simple (MLP)** | 393,446 | 0.2350 | 0.2352 | **0.2352** | Modelo demasiado simple para sacar conclusiones |
+
+---
+
+## Detalles de cada modelo
+
+### 1. Regresión Logística (Modelo Lineal)
+Fue el primer intento y el resultado ha sido de un **45.45%** de acierto. El problema principal es que este modelo intenta separar los materiales usando "líneas rectas", pero las imágenes son mucho más complejas que eso por lo que es imposible de resolver. Identifica bien el papel, pero falla mucho con el vidrio y el plástico.
+
+### 2. Random Forest (Machine Learning)
+Es el modelo básico que mejor ha funcionado con un **61.86%** de acierto. Tras ajustar la profundidad para que no se limitara a memorizar las fotos (sobreentrenamiento), conseguimos un modelo equilibrado de **5,902 nodos**, muy sólido reconociendo papel y cartón.
+
+### 3. Red Neuronal Simple (MLP)
+Curiosamente, este modelo dio el peor resultado (**23.52%**). Las gráficas muestran que el modelo se estanca rápido: tiene muchos parámetros (**393,446**), pero no sabe usarlos para entender el problema, lo que confirma que para imágenes necesitamos capas convolucionales.
+
