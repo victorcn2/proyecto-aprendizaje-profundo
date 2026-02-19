@@ -1,12 +1,17 @@
-# Librerías básicas de procesamiento y visualización
+# Procesamiento de datos y álgebra lineal
 numpy
 pandas
+
+# Visualización de datos
 matplotlib
 seaborn
-Pillow
 
-# Deep Learning
-tensorflow
-
-# Utilidades
+# Machine Learning (Modelos Lineales y Árboles)
 scikit-learn
+
+# Deep Learning (Redes Neuronales)
+tensorflow
+keras
+
+# Procesamiento de imágenes (usado internamente por los cargadores)
+pillow
