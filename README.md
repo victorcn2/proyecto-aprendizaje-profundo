@@ -56,3 +56,36 @@ Es el modelo básico que mejor ha funcionado con un **61.86%** de acierto. Tras 
 ### 3. Red Neuronal Simple (MLP)
 Curiosamente, este modelo dio el peor resultado (**23.52%**). Las gráficas muestran que el modelo se estanca rápido: tiene muchos parámetros (**393,446**), pero no sabe usarlos para entender el problema, lo que confirma que para imágenes necesitamos capas convolucionales.
 
+## 🧠 Evolución de los Modelos de Deep Learning
+
+Para esta fase del proyecto, se ha abandonado el enfoque de Machine Learning clásico (Random Forest, Regresión, etc.) para implementar Redes Neuronales Convolucionales (CNN) capaces de extraer características espaciales de las imágenes. 
+
+En lugar de entrenar un único modelo, se ha seguido una metodología iterativa para comprender y mitigar los problemas clásicos de las redes profundas con datasets limitados, especialmente el *Overfitting*.
+
+### 1. Fase 1: CNN Básica sin Regularización de Entrada
+* **Archivo:** `modelo_cnn_1.py` / Notebook correspondiente (`modelo_cnn_entrega3.ipynb`)
+* **Descripción:** Hemos implementado una arquitectura profunda con bloques de Convolución (32, 64 y 128 filtros), Batch Normalization, Global Average Pooling y Dropout en las capas densas. Sin embargo, no hemos aplicado ninguna transformación a las imágenes de entrada.
+* **Problema detectado:** *Overfitting extremo*. Al tener pocas imágenes, la red memorizaba el conjunto de entrenamiento (Train Acc cercano al 100%), mientras que el Validation Loss dejaba de mejorar muy pronto, obligando al *Early Stopping* a cortar el entrenamiento tempranamente.
+* **Resultados:**
+  * Accuracy Train: `0.2337`%
+  * Accuracy Val: `0.2372`%
+  * Accuracy Test: `0.2352`%
+
+### 2. Fase 2: CNN Avanzada con Data Augmentation
+* **Archivo:** `modelo cnn avanzado.ipynb`
+* **Descripción:** Para evitar que el modelo memorizase las imágenes, hemos integrado una capa de **Data Augmentation** al inicio de la red (`RandomFlip`, `RandomRotation`, `RandomZoom`). De esta forma, el modelo nunca ve exactamente la misma imagen dos veces por época.
+* **Problema detectado:** *Inestabilidad en la convergencia*. Aunque se redujo drásticamente el overfitting, la curva del Validation Loss mostraba grandes rebotes. El optimizador daba pasos demasiado grandes al acercarse a la solución óptima, pasándose de largo constantemente.
+* **Resultados:**
+  * Accuracy Train: `0.9215`%
+  * Accuracy Val: `0.7925`%
+  * Accuracy Test: `0.7767`%
+
+### 3. Fase 3: CNN Pro Definitiva (El Modelo Final)
+* **Archivo:** `modelo cnn avanzado_final.ipynb`
+* **Descripción:** Al modelo anterior se le añadió el callback **`ReduceLROnPlateau`**. Esta técnica monitoriza el Validation Loss y, si detecta un estancamiento durante 5 épocas, reduce el *Learning Rate* a la mitad.
+* **Conclusión:** *Convergencia perfecta*. Las gráficas se volvieron completamente suaves y estables. El modelo ha podido seguir aprendiendo durante más de 80 épocas sin rebotar, logrando el mayor nivel de generalización y superando ampliamente la barrera del 75% de acierto real en imágenes nuevas.
+* **Resultados Finales:**
+  * Parámetros totales: `111430`
+  * Accuracy Train: `0.9426`%
+  * Accuracy Val: `0.8241`%
+  * Accuracy Test: `0.8419`%
